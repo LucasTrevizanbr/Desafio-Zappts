@@ -29,7 +29,7 @@ public class CrudColecaoService {
 
         Usuario usuario =  usuarioService.buscarPorId(formColecao.getIdDonoColecao());
 
-        if(colecaoRepository.existsByNomeColecao(formColecao.getNomeColecao())){
+        if(colecaoRepository.existsByNomeColecaoAndDonoColecao(formColecao.getNomeColecao(), usuario)){
                 throw new NegocioException("Você Já tem uma coleção com esse nome!");
         }
 
