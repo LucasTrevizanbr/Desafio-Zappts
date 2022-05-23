@@ -26,9 +26,6 @@ public class CartaForm {
     @NotNull @Positive
     private int quantidade;
 
-    @NotNull @Positive
-    private Long idColecao;
-
     public String getNomeCarta() {
         return nomeCarta;
     }
@@ -51,10 +48,6 @@ public class CartaForm {
 
     public int getQuantidade() {
         return quantidade;
-    }
-
-    public Long getIdColecao() {
-        return idColecao;
     }
 
     public Carta converterParaEntidade() {

@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 public class ColecaoDTO {
 
+    private final Long idColecao;
+
     private final String nomeColecao;
 
     private final String descricaoColecao;
@@ -18,12 +20,17 @@ public class ColecaoDTO {
     private final String donoDaColecao;
 
     public ColecaoDTO(Colecao colecao) {
+        this.idColecao = colecao.getId();
         this.nomeColecao = colecao.getNomeColecao();
         this.descricaoColecao = colecao.getDescricaoColecao();
         this.quantidadeCartasDaColecao = colecao.getCartas().size();
         this.totalEmReaisDaColecao = colecao.getCartas().stream().map(Carta::getPreco)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         this.donoDaColecao = colecao.getDonoColecao().getNome();
+    }
+
+    public Long getIdColecao() {
+        return idColecao;
     }
 
     public String getNomeColecao() {

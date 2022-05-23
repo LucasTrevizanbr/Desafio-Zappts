@@ -15,8 +15,6 @@ public class FormColecao {
     @NotBlank @Size(max = 200)
     private String descricaoColecao;
 
-    @NotNull @Positive
-    private Long idDonoColecao;
 
     public String getNomeColecao() {
         return nomeColecao;
@@ -24,10 +22,6 @@ public class FormColecao {
 
     public String getDescricaoColecao() {
         return descricaoColecao;
-    }
-
-    public Long getIdDonoColecao() {
-        return idDonoColecao;
     }
 
     public Colecao converterParaEntidade() {

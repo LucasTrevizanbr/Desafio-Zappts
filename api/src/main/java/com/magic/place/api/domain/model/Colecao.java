@@ -20,7 +20,7 @@ public class Colecao {
     @ManyToOne @JoinColumn(name = "id_dono_colecao")
     private Usuario donoColecao;
 
-    @OneToMany(mappedBy = "colecaoDaCarta")
+    @OneToMany(mappedBy = "colecaoDaCarta", cascade = CascadeType.ALL)
     private List<Carta> cartas = new ArrayList<>();
 
     @Override

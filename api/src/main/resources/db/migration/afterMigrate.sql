@@ -17,7 +17,7 @@ INSERT INTO usuario (id, nome, email, telefone, senha) VALUES (3, 'Marco Zambrot
 INSERT INTO COLECAO (id, nome_colecao, descricao_colecao, id_dono_colecao) VALUES (1, 'As mais raras de 2002', 'as cartas mais raras das expansões de 2002', 1);
 INSERT INTO CARTA (id, nome_carta, edicao, idioma, laminada, preco, quantidade, id_colecao_carta) VALUES (1, 'Barão setentrional', 'Noite nas arábias', 'PORTUGUES', false, '120.50', 1, 1);
 INSERT INTO CARTA (id, nome_carta, edicao, idioma, laminada, preco, quantidade, id_colecao_carta) VALUES (2, 'Mago mental', 'Commander Legends: Batalha por Portal de Baldur', 'PORTUGUES', false, '337.20', 3, 1);
-INSERT INTO CARTA (id, nome_carta, edicao, idioma, laminada, preco, quantidade, id_colecao_carta) VALUES (3, 'Beco da morte', 'Ruas de nova Capenna', 'Japones', false, '66.50', 2, 1);
+INSERT INTO CARTA (id, nome_carta, edicao, idioma, laminada, preco, quantidade, id_colecao_carta) VALUES (3, 'Beco da morte', 'Ruas de nova Capenna', 'JAPONES', false, '66.50', 2, 1);
 
 INSERT INTO COLECAO (id, nome_colecao, descricao_colecao, id_dono_colecao) VALUES (2, 'Minhas favoritas', 'as cartas que eu mais gosto', 1);
 INSERT INTO CARTA (id, nome_carta, edicao, idioma, laminada, preco, quantidade, id_colecao_carta) VALUES (4, 'Gnomo zureta', 'A guerra da Centelha', 'JAPONES', true, '300.50', 1, 2);

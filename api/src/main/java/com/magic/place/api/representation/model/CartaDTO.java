@@ -18,6 +18,8 @@ public class CartaDTO {
 
     private final int quantidade;
 
+    private final Long idColecao;
+
     public CartaDTO(Carta carta) {
         this.nomeCarta = carta.getNomeCarta();
         this.edicao = carta.getEdicao();
@@ -25,6 +27,7 @@ public class CartaDTO {
         this.laminada = carta.isLaminada();
         this.preco = carta.getPreco();
         this.quantidade = carta.getQuantidade();
+        this.idColecao = carta.getColecaoDaCarta().getId();
     }
 
     public String getNomeCarta() {
@@ -49,5 +52,9 @@ public class CartaDTO {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public Long getIdColecao() {
+        return idColecao;
     }
 }

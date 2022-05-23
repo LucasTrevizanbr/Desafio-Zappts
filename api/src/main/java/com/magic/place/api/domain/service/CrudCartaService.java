@@ -39,9 +39,9 @@ public class CrudCartaService {
     }
 
     @Transactional
-    public Carta salvarCarta(CartaForm cartaForm, Long idUsuario) {
+    public Carta salvarCarta(CartaForm cartaForm, Long idUsuario, Long idColecao) {
 
-        Colecao colecao = colecaoService.buscarPorId(cartaForm.getIdColecao());
+        Colecao colecao = colecaoService.buscarPorId(idColecao);
         Usuario usuario = usuarioService.buscarPorId(idUsuario);
 
         this.checarAutoridadeSobreACarta(colecao, usuario);
@@ -100,7 +100,7 @@ public class CrudCartaService {
 
     private void checarAutoridadeSobreACarta(Colecao colecao, Usuario usuario) {
         if(!usuario.equals(colecao.getDonoColecao())){
-            throw new NegocioException("Essa carta não é sua!");
+            throw new NegocioException("Você não tem permissão para fazer isso!");
         }
     }
 
