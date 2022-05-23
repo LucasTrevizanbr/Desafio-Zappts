@@ -1,4 +1,4 @@
-package com.magic.place.api.controller.dto;
+package com.magic.place.api.representation.form;
 
 import com.magic.place.api.domain.model.Colecao;
 

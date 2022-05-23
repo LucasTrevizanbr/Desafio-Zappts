@@ -1,19 +1,18 @@
 package com.magic.place.api.domain.service;
 
-import com.magic.place.api.controller.dto.FormColecao;
+import com.magic.place.api.representation.form.FormColecao;
 import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Colecao;
 import com.magic.place.api.domain.model.Usuario;
 import com.magic.place.api.domain.repository.ColecaoRepository;
-import com.magic.place.api.domain.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CrudColecaoService {
 
-    private ColecaoRepository colecaoRepository;
-    private CadastroUsuarioService usuarioService;
+    private final ColecaoRepository colecaoRepository;
+    private final CadastroUsuarioService usuarioService;
 
     public CrudColecaoService(ColecaoRepository colecaoRepository, CadastroUsuarioService usuarioService) {
         this.colecaoRepository = colecaoRepository;
@@ -40,5 +39,6 @@ public class CrudColecaoService {
         return colecaoRepository.save(colecao);
 
     }
+
 
 }

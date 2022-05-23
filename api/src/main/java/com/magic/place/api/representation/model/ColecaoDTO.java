@@ -1,4 +1,4 @@
-package com.magic.place.api.controller.dto;
+package com.magic.place.api.representation.model;
 
 import com.magic.place.api.domain.model.Carta;
 import com.magic.place.api.domain.model.Colecao;
@@ -7,15 +7,15 @@ import java.math.BigDecimal;
 
 public class ColecaoDTO {
 
-    private String nomeColecao;
+    private final String nomeColecao;
 
-    private String descricaoColecao;
+    private final String descricaoColecao;
 
-    private int quantidadeCartasDaColecao;
+    private final int quantidadeCartasDaColecao;
 
-    private BigDecimal totalEmReaisDaColecao;
+    private final BigDecimal totalEmReaisDaColecao;
 
-    private String donoDaColecao;
+    private final String donoDaColecao;
 
     public ColecaoDTO(Colecao colecao) {
         this.nomeColecao = colecao.getNomeColecao();

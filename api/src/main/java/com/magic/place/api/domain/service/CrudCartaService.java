@@ -2,7 +2,8 @@ package com.magic.place.api.domain.service;
 
 import com.detectlanguage.Result;
 import com.detectlanguage.errors.APIError;
-import com.magic.place.api.controller.dto.CartaForm;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.magic.place.api.representation.form.CartaForm;
 import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Carta;
 import com.magic.place.api.domain.model.Colecao;
@@ -11,9 +12,12 @@ import com.magic.place.api.domain.repository.CartaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 
 import com.detectlanguage.DetectLanguage;
+import org.springframework.util.ReflectionUtils;
 
 @Service
 public class CrudCartaService {
@@ -29,27 +33,20 @@ public class CrudCartaService {
         this.usuarioService = usuarioService;
     }
 
+    public Carta buscarPorId(Long idCarta) {
+        return cartaRepository.findById(idCarta)
+                .orElseThrow(() -> new NegocioException("Não existe carta para o ID informado"));
+    }
+
     @Transactional
     public Carta salvarCarta(CartaForm cartaForm, Long idUsuario) {
 
         Colecao colecao = colecaoService.buscarPorId(cartaForm.getIdColecao());
         Usuario usuario = usuarioService.buscarPorId(idUsuario);
 
-        String idiomaNomeDaCarta = identificarIdiomaDoNomeDaCarta(cartaForm.getNomeCarta());
-
-        if(!idiomaNomeDaCarta.equals("pt")){
-            throw new NegocioException("O nome da carta deve ser no idioma PT-BR!");
-        }
-
-        if(!usuario.equals(colecao.getDonoColecao())){
-            throw new NegocioException("Você não pode registrar uma carta em uma coleção que não é sua!");
-        }
-
-        if(cartaRepository.existsByEdicaoAndIdiomaAndLaminada(cartaForm.getEdicao(), cartaForm.getIdioma(),
-                cartaForm.isLaminada()) ){
-            throw new NegocioException("Sua coleção já tem uma carta com essas caracteristicas, " +
-                    "tente atualizar a quantidade da carta já existente");
-        }
+        this.checarAutoridadeSobreACarta(colecao, usuario);
+        this.verificarIdiomaDoNome(cartaForm.getNomeCarta());
+        this.checarExistenciaDaCarta(cartaForm);
 
         Carta carta = cartaForm.converterParaEntidade();
         carta.setColecaoDaCarta(colecao);
@@ -57,6 +54,63 @@ public class CrudCartaService {
         return cartaRepository.save(carta);
     }
 
+    @Transactional
+    public Carta atualizarCarta(Long idCarta, Map<String, Object> propriedadesDaAtualizacao, Long idUsuario) {
+        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Carta cartaAtual = this.buscarPorId(idCarta);
+        Carta cartaAtualizada = objectMapper.convertValue(propriedadesDaAtualizacao, Carta.class);
+
+        propriedadesDaAtualizacao.keySet().forEach((nomeCampo) ->{
+            Field campoDaClasse = ReflectionUtils.findField(Carta.class, nomeCampo);
+            campoDaClasse.setAccessible(true);
+
+            Object valorCampo = ReflectionUtils.getField(campoDaClasse, cartaAtualizada);
+            ReflectionUtils.setField(campoDaClasse, cartaAtual, valorCampo);
+        });
+
+        this.verificarIdiomaDoNome(cartaAtual.getNomeCarta());
+        this.checarAutoridadeSobreACarta(cartaAtual.getColecaoDaCarta(), usuario);
+
+        return cartaRepository.save(cartaAtual);
+    }
+
+    @Transactional
+    public void deletarCarta(Long idUsuario, Long idCarta) {
+
+        if(!cartaRepository.existsById(idCarta)){
+            throw new NegocioException("Não existe carta com o id informado");
+        }
+
+        Colecao colecao = cartaRepository.findById(idCarta).get().getColecaoDaCarta();
+        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+
+        this.checarAutoridadeSobreACarta(colecao, usuario);
+
+        cartaRepository.deleteById(idCarta);
+    }
+
+    private void verificarIdiomaDoNome(String nomeCarta) {
+        String idioma = this.identificarIdiomaDoNomeDaCarta(nomeCarta);
+        if(!idioma.equals("pt")){
+            throw new NegocioException("O nome da carta deve ser no idioma PT-BR!");
+        }
+    }
+
+    private void checarAutoridadeSobreACarta(Colecao colecao, Usuario usuario) {
+        if(!usuario.equals(colecao.getDonoColecao())){
+            throw new NegocioException("Essa carta não é sua!");
+        }
+    }
+
+    private void checarExistenciaDaCarta(CartaForm cartaForm) {
+        if(cartaRepository.existsByEdicaoAndIdiomaAndLaminada(cartaForm.getEdicao(), cartaForm.getIdioma(),
+                cartaForm.isLaminada()) ){
+            throw new NegocioException("Sua coleção já tem uma carta com essas caracteristicas, " +
+                    "tente atualizar a quantidade da carta já existente");
+        }
+    }
 
     private String identificarIdiomaDoNomeDaCarta(String nomeCarta) {
 
@@ -74,6 +128,5 @@ public class CrudCartaService {
 
         return idioma;
     }
-
 
 }

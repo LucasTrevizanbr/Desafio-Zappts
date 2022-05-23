@@ -1,6 +1,6 @@
 package com.magic.place.api.domain.service;
 
-import com.magic.place.api.controller.dto.FormUsuario;
+import com.magic.place.api.representation.form.FormUsuario;
 import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Usuario;
 import com.magic.place.api.domain.repository.UsuarioRepository;

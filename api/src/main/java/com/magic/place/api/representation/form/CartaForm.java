@@ -1,10 +1,8 @@
-package com.magic.place.api.controller.dto;
+package com.magic.place.api.representation.form;
 
 import com.magic.place.api.domain.model.Carta;
 import com.magic.place.api.domain.model.Idioma;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 

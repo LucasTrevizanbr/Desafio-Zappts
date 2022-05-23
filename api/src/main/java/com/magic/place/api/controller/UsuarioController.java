@@ -1,8 +1,7 @@
 package com.magic.place.api.controller;
 
-import com.magic.place.api.controller.dto.FormUsuario;
-import com.magic.place.api.controller.dto.UsuarioDetalhadoDTO;
-import com.magic.place.api.domain.model.Usuario;
+import com.magic.place.api.representation.form.FormUsuario;
+import com.magic.place.api.representation.model.UsuarioDetalhadoDTO;
 import com.magic.place.api.domain.repository.UsuarioRepository;
 import com.magic.place.api.domain.service.CadastroUsuarioService;
 import org.springframework.http.HttpStatus;
