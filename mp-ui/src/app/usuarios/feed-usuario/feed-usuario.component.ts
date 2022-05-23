@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-feed-usuario',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedUsuarioComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: Router,
+    private rotaAtiva: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
   }
 
+  irParaColecao(){
+    console.log('indo para coleção')
+    this.route.navigate(['minha-colecao'], {relativeTo: this.rotaAtiva.parent})
+  }
 }

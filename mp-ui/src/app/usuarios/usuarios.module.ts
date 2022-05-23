@@ -14,12 +14,14 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { FeedUsuarioComponent } from './feed-usuario/feed-usuario.component';
+import { ColecaoUsuarioComponent } from './colecao-usuario/colecao-usuario.component';
 
 
 @NgModule({
   declarations: [
     CadastroComponent,
-    FeedUsuarioComponent
+    FeedUsuarioComponent,
+    ColecaoUsuarioComponent
   ],
   imports: [
     CommonModule,

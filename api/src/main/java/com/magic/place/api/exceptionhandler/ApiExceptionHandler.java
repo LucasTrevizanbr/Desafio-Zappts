@@ -1,6 +1,7 @@
 package com.magic.place.api.exceptionhandler;
 
-import com.magic.place.api.domain.exception.UsuarioJaCadastradoException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.magic.place.api.domain.exception.NegocioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -44,8 +45,8 @@ public class ApiExceptionHandler {
 
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(UsuarioJaCadastradoException.class)
-    public Erro handler(UsuarioJaCadastradoException exception) {
+    @ExceptionHandler(NegocioException.class)
+    public Erro handler(NegocioException exception) {
         Erro erro = new Erro();
         erro.setTitulo(exception.getMessage());
         erro.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -53,4 +54,17 @@ public class ApiExceptionHandler {
 
         return erro;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidFormatException.class)
+    public Erro handler(InvalidFormatException exception) {
+        Erro erro = new Erro();
+        erro.setTitulo("As cartas só podem ter o idioma em PORTUGUES, INGLES ou JAPONES");
+        erro.setStatus(HttpStatus.BAD_REQUEST.value());
+        erro.setDataHoraErro(LocalDateTime.now());
+
+        return erro;
+    }
+
+
 }

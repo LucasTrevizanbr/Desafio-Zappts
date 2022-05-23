@@ -24,7 +24,6 @@ public class UsuarioController {
         this.cadastroUsuarioService = cadastroUsuarioService;
     }
 
-
     @PostMapping("/cadastrar-usuario")
     public ResponseEntity<UsuarioDetalhadoDTO> criarUsuario(@RequestBody @Valid FormUsuario formUsuario){
 

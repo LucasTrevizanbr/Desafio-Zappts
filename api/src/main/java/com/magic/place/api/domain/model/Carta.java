@@ -16,6 +16,7 @@ public class Carta {
 
     private String edicao;
 
+    @Enumerated(EnumType.STRING)
     private Idioma idioma;
 
     private boolean laminada;
@@ -24,7 +25,7 @@ public class Carta {
 
     private int quantidade;
 
-    @ManyToOne
+    @ManyToOne @JoinColumn(name = "id_colecao_carta")
     private Colecao colecaoDaCarta;
 
     @Override

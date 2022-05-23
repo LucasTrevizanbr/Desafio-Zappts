@@ -1,7 +1,7 @@
 package com.magic.place.api.domain.service;
 
 import com.magic.place.api.controller.dto.FormUsuario;
-import com.magic.place.api.domain.exception.UsuarioJaCadastradoException;
+import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Usuario;
 import com.magic.place.api.domain.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,16 @@ public class CadastroUsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    public Usuario buscarPorId(Long id){
+        return usuarioRepository.findById(id)
+                .orElseThrow(() ->  new NegocioException("Não existe usuário com o ID informado!"));
+    }
+
     @Transactional
     public Usuario salvar(FormUsuario formUsuario){
 
         if(usuarioRepository.existsByEmail(formUsuario.getEmail())){
-            throw new UsuarioJaCadastradoException("Esse email já esta cadastrado no sistema");
+            throw new NegocioException("Esse email já esta cadastrado no sistema");
         }
 
         Usuario usuario = formUsuario.converterParaEntidade();

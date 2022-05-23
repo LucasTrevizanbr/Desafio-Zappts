@@ -1,6 +1,7 @@
 package com.magic.place.api.domain.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,11 +17,11 @@ public class Colecao {
 
     private String descricaoColecao;
 
-    @ManyToOne
+    @ManyToOne @JoinColumn(name = "id_dono_colecao")
     private Usuario donoColecao;
 
     @OneToMany(mappedBy = "colecaoDaCarta")
-    private List<Carta> cartas;
+    private List<Carta> cartas = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
