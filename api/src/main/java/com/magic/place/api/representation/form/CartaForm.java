@@ -11,7 +11,7 @@ public class CartaForm {
     @NotBlank @Size(max = 60)
     private String nomeCarta;
 
-    @NotBlank @Size(max = 30)
+    @NotBlank @Size(max = 150)
     private String edicao;
 
     @NotNull
@@ -25,6 +25,30 @@ public class CartaForm {
 
     @NotNull @Positive
     private int quantidade;
+
+    public Carta converterParaEntidade() {
+        Carta carta = new Carta();
+        carta.setNomeCarta(this.getNomeCarta());
+        carta.setPreco(this.getPreco());
+        carta.setEdicao(this.getEdicao());
+        carta.setIdioma(this.getIdioma());
+        carta.setQuantidade(this.getQuantidade());
+        carta.setLaminada(this.isLaminada());
+
+        return carta;
+    }
+
+    public Carta converterParaEntidade(Carta carta) {
+        carta.setNomeCarta(this.getNomeCarta());
+        carta.setPreco(this.getPreco());
+        carta.setEdicao(this.getEdicao());
+        carta.setIdioma(this.getIdioma());
+        carta.setQuantidade(this.getQuantidade());
+        carta.setLaminada(this.isLaminada());
+
+        return carta;
+    }
+
 
     public String getNomeCarta() {
         return nomeCarta;
@@ -50,15 +74,27 @@ public class CartaForm {
         return quantidade;
     }
 
-    public Carta converterParaEntidade() {
-        Carta carta = new Carta();
-        carta.setNomeCarta(this.getNomeCarta());
-        carta.setPreco(this.getPreco());
-        carta.setEdicao(this.getEdicao());
-        carta.setIdioma(this.getIdioma());
-        carta.setQuantidade(this.getQuantidade());
-        carta.setLaminada(this.isLaminada());
+    public void setNomeCarta(String nomeCarta) {
+        this.nomeCarta = nomeCarta;
+    }
 
-        return carta;
+    public void setEdicao(String edicao) {
+        this.edicao = edicao;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
+    }
+
+    public void setLaminada(boolean laminada) {
+        this.laminada = laminada;
+    }
+
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }

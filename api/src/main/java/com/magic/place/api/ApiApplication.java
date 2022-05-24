@@ -8,9 +8,11 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableSpringDataWebSupport
+@EnableSwagger2
 public class ApiApplication {
 
 	public static void main(String[] args) {

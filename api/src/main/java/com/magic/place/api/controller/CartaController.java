@@ -75,11 +75,11 @@ public class CartaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartaDTO);
     }
 
-    @PatchMapping("/atualizar-carta/idUsuario={idUsuario}&idCarta={idCarta}")
+    @PutMapping("/atualizar-carta/idUsuario={idUsuario}&idCarta={idCarta}")
     public ResponseEntity<CartaDTO> atualizarCarta(@PathVariable Long idCarta, @PathVariable Long idUsuario,
-                                                   @RequestBody Map<String, Object> propriedadesDaAtualizacao){
+                                                   @RequestBody CartaForm cartaForm){
 
-        CartaDTO cartaDTO = new CartaDTO(cartaService.atualizarCarta(idCarta, propriedadesDaAtualizacao, idUsuario));
+        CartaDTO cartaDTO = new CartaDTO(cartaService.atualizarCarta(idCarta, cartaForm, idUsuario));
 
         return ResponseEntity.ok(cartaDTO);
     }

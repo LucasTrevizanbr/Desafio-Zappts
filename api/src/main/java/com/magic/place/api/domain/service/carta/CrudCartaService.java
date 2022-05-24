@@ -57,20 +57,11 @@ public class CrudCartaService {
     }
 
     @Transactional
-    public Carta atualizarCarta(Long idCarta, Map<String, Object> propriedadesDaAtualizacao, Long idUsuario) {
+    public Carta atualizarCarta(Long idCarta, CartaForm cartaForm, Long idUsuario) {
         Usuario usuario = usuarioService.buscarPorId(idUsuario);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         Carta cartaAtual = this.buscarPorId(idCarta);
-        Carta cartaAtualizada = objectMapper.convertValue(propriedadesDaAtualizacao, Carta.class);
-
-        propriedadesDaAtualizacao.keySet().forEach((nomeCampo) ->{
-            Field campoDaClasse = ReflectionUtils.findField(Carta.class, nomeCampo);
-            campoDaClasse.setAccessible(true);
-
-            Object valorCampo = ReflectionUtils.getField(campoDaClasse, cartaAtualizada);
-            ReflectionUtils.setField(campoDaClasse, cartaAtual, valorCampo);
-        });
+        cartaAtual = cartaForm.converterParaEntidade(cartaAtual);
 
         this.verificarIdiomaDoNome(cartaAtual.getNomeCarta());
         this.checarAutoridadeSobreACarta(cartaAtual.getColecaoDaCarta(), usuario);
