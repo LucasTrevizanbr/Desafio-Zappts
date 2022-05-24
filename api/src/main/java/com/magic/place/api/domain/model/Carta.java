@@ -104,4 +104,5 @@ public class Carta {
     public void setColecaoDaCarta(Colecao colecaoDaCarta) {
         this.colecaoDaCarta = colecaoDaCarta;
     }
+
 }

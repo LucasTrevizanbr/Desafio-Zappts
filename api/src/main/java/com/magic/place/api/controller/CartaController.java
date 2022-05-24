@@ -36,6 +36,12 @@ public class CartaController {
         this.cartaRepository = cartaRepository;
     }
 
+    @GetMapping("/{idCarta}")
+    public ResponseEntity<CartaDTO> buscarUmaCartaEspecifica(@PathVariable Long idCarta){
+        Carta carta = cartaService.buscarPorId(idCarta);
+        return ResponseEntity.ok(new CartaDTO(carta));
+    }
+
     @GetMapping("/da-colecao/idColecao={id}&pagina={pg}&qtdPagina={qtd}&ordenarPor={ordenacao}")
     public ResponseEntity<Page<CartaDTO>> buscarCartasDeUmaColecao(@PathVariable Long id,
                                                                    @PathVariable int pg, @PathVariable int qtd,

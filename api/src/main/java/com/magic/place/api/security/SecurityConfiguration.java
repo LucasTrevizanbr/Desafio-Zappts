@@ -53,6 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/usuarios/cadastrar").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/usuarios/logar").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/cartas/{idCarta}").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()
                 .and().csrf().disable()
