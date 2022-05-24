@@ -13,7 +13,7 @@ export class UsuarioService {
 
   salvar(registro : CadastroUsuario){
 
-    return this.httpClient.post<CadastroUsuario>(`${this.API}/cadastrar-usuario`, registro);
+    return this.httpClient.post<CadastroUsuario>(`${this.API}/cadastrar`, registro);
 
   }
 }

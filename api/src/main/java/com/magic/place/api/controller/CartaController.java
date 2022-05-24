@@ -6,7 +6,7 @@ import com.magic.place.api.domain.repository.CartaRepository;
 import com.magic.place.api.domain.repository.ColecaoRepository;
 import com.magic.place.api.representation.model.CartaDTO;
 import com.magic.place.api.representation.form.CartaForm;
-import com.magic.place.api.domain.service.CrudCartaService;
+import com.magic.place.api.domain.service.carta.CrudCartaService;
 import com.magic.place.api.specification.CartaSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

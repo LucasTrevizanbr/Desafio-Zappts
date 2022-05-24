@@ -12,6 +12,7 @@ public class UsuarioDetalhadoDTO {
 
     private final String telefone;
 
+    private TokenDto tokenDto;
 
     public UsuarioDetalhadoDTO(Usuario usuario) {
         this.id = usuario.getId();
@@ -34,5 +35,14 @@ public class UsuarioDetalhadoDTO {
 
     public String getTelefone() {
         return telefone;
+    }
+
+
+    public void setTokenDto(TokenDto tokenDto) {
+        this.tokenDto = tokenDto;
+    }
+
+    public TokenDto getTokenDto() {
+        return tokenDto;
     }
 }

@@ -1,11 +1,10 @@
 package com.magic.place.api.controller;
 
-import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Colecao;
 import com.magic.place.api.domain.repository.ColecaoRepository;
 import com.magic.place.api.representation.model.ColecaoDTO;
 import com.magic.place.api.representation.form.FormColecao;
-import com.magic.place.api.domain.service.CrudColecaoService;
+import com.magic.place.api.domain.service.colecao.CrudColecaoService;
 import com.magic.place.api.specification.ColecaoSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

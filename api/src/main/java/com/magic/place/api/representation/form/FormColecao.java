@@ -3,8 +3,6 @@ package com.magic.place.api.representation.form;
 import com.magic.place.api.domain.model.Colecao;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class FormColecao {

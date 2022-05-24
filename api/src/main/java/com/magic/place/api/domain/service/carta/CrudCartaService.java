@@ -1,8 +1,10 @@
-package com.magic.place.api.domain.service;
+package com.magic.place.api.domain.service.carta;
 
 import com.detectlanguage.Result;
 import com.detectlanguage.errors.APIError;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.magic.place.api.domain.service.colecao.CrudColecaoService;
+import com.magic.place.api.domain.service.usuario.CadastroUsuarioService;
 import com.magic.place.api.representation.form.CartaForm;
 import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Carta;

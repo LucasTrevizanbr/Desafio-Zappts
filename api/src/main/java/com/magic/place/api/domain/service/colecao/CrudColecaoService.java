@@ -1,5 +1,6 @@
-package com.magic.place.api.domain.service;
+package com.magic.place.api.domain.service.colecao;
 
+import com.magic.place.api.domain.service.usuario.CadastroUsuarioService;
 import com.magic.place.api.representation.form.FormColecao;
 import com.magic.place.api.domain.exception.NegocioException;
 import com.magic.place.api.domain.model.Colecao;
